@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="omni_robot">
+
+  <!-- Include parts -->
+  <xacro:include filename="$(find motor_controller)/urdf/base.xacro"/>
+  <xacro:include filename="$(find motor_controller)/urdf/wheels.xacro"/>
+  <xacro:include filename="$(find motor_controller)/urdf/control.xacro"/>
+
+  <!-- Instantiate -->
+  <xacro:base/>
+  <xacro:wheels/>
+  <xacro:control/>
+
+</robot>
