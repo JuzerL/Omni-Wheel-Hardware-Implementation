@@ -20,3 +20,4 @@
                ixy="0" ixz="0" iyz="0"/>
     </inertial>
   </link>
+</robot>
