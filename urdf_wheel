@@ -43,3 +43,5 @@
 
   <!-- Rear Right -->
   <xacro:wheel name="wheel_rr" x="-0.15" y="-0.15"/>
+
+</robot>
