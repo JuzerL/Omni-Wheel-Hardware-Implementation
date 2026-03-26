@@ -1,5 +1,9 @@
 #pragma once
 
+#include <fcntl.h>   // File control
+#include <termios.h> // POSIX terminal control
+#include <unistd.h>  // UNIX standard functions
+
 #include <vector>
 #include <string>
 
@@ -55,6 +59,8 @@ private:
   // Serial parameters
   std::string serial_device_;
   int baud_rate_;
+
+  int serial_port_fd_; // The "File Descriptor" for the USB port
 
   // Placeholder for serial connection
   bool serial_connected_ = false;
