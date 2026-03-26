@@ -3,5 +3,8 @@
     name="omni_robot_hardware/OmniSystemHardware"
     type="omni_robot_hardware::OmniSystemHardware"
     base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Hardware interface for omni wheel robot using serial communication.
+    </description>
   </class>
 </library>
