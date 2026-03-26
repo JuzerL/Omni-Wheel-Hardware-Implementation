@@ -1,5 +1,7 @@
-<library path="robot_hardware">
-  <class name="robot_hardware/OmniHardware"
-         type="robot_hardware::OmniHardware"
-         base_class_type="hardware_interface::SystemInterface"/>
+<library path="omni_robot_hardware">
+  <class
+    name="omni_robot_hardware/OmniSystemHardware"
+    type="omni_robot_hardware::OmniSystemHardware"
+    base_class_type="hardware_interface::SystemInterface">
+  </class>
 </library>
