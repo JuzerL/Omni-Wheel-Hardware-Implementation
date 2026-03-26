@@ -1,3 +1,36 @@
-<depend>hardware_interface</depend>
-<depend>pluginlib</depend>
-<depend>rclcpp</depend>
+<?xml version="1.0"?>
+<package format="3">
+  <name>omni_robot_hardware</name>
+  <version>0.0.1</version>
+  <description>Hardware interface plugin for a 4-wheel omni robot</description>
+
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>Apache-2.0</license>
+
+  <!-- Build tool -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Build dependencies -->
+  <build_depend>rclcpp</build_depend>
+  <build_depend>rclcpp_lifecycle</build_depend>
+  <build_depend>hardware_interface</build_depend>
+  <build_depend>pluginlib</build_depend>
+  <build_depend>std_msgs</build_depend>
+
+  <!-- Execution dependencies -->
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>rclcpp_lifecycle</exec_depend>
+  <exec_depend>hardware_interface</exec_depend>
+  <exec_depend>pluginlib</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <!-- Export -->
+  <export>
+    <build_type>ament_cmake</build_type>
+    <hardware_interface plugin="${prefix}/omni_system_hardware.xml"/>
+  </export>
+
+  <!-- Important for ros2_control -->
+  <member_of_group>ros2_control_plugins</member_of_group>
+
+</package>
