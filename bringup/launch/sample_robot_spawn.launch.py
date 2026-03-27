@@ -62,7 +62,7 @@ omni_controller_spawner = Node(
 )
 
 # ===== Optional: cmd_vel test node =====
-velocity_pub = Node(
+'''velocity_pub = Node(
     package='velocity_pub',
     executable='velocity_pub',
     name='velocity_pub',
@@ -70,7 +70,7 @@ velocity_pub = Node(
         ('/cmd_vel_stamped', '/omni_wheel_controller/cmd_vel'),
     ],
     output='screen'
-)
+)'''
 
 # ===== Return LaunchDescription =====
 return LaunchDescription([
