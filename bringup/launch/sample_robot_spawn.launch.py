@@ -10,7 +10,7 @@ def generate_launch_description():
 
 ```
 # ===== Paths =====
-description_pkg = get_package_share_directory('your_description_package')  
+description_pkg = get_package_share_directory('omni_robot_bringup')  
 controller_pkg = get_package_share_directory('omni_wheel_controller')
 
 xacro_file = os.path.join(
