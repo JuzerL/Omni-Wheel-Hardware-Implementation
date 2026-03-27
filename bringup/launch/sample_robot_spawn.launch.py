@@ -11,7 +11,7 @@ def generate_launch_description():
 ```
 # ===== Paths =====
 description_pkg = get_package_share_directory('your_description_package')  
-controller_pkg = get_package_share_directory('your_controller_package')
+controller_pkg = get_package_share_directory('omni_wheel_controller')
 
 xacro_file = os.path.join(
     description_pkg,
