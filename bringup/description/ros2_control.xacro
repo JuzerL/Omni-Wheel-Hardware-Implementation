@@ -19,4 +19,56 @@
   <material name="yellow">
     <color rgba="0 1.0 1.0 1.0"/>
   </material>
+
+  <?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="pi" params="3.1415926535897931" />
+  <material name="gray">
+    <color rgba="0.8 0.8 0.8 1.0"/>
+  </material>
+  <material name="black">
+    <color rgba="0 0 0 1.0"/>
+  </material>
+  <material name="white">
+    <color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+  <material name="red">
+    <color rgba="1.0 0 0 1.0"/>
+  </material>
+  <material name="light_red">
+    <color rgba="1.0 0.5 0.5 1.0"/>
+  </material>
+  <material name="yellow">
+    <color rgba="0 1.0 1.0 1.0"/>
+  </material>
+  
+  <ros2_control name="OmniRobotSystem" type="system">
+    <hardware>
+      <plugin>robot_hardware/OmniSystemHardware</plugin>
+      <param name="serial_port">/dev/ttyUSB0</param>
+      <param name="baud_rate">115200</param>
+    </hardware>
+
+    <joint name="front_left_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="front_right_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="rear_left_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+    <joint name="rear_right_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+  </ros2_control>
+</robot>
 </robot>
