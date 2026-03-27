@@ -55,8 +55,8 @@ install(
 )
 
 install(
-  DIRECTORY include/
-  DESTINATION include
+  FILES include/omni_hardware.hpp
+  DESTINATION include/${PROJECT_NAME}
 )
 
 install(
