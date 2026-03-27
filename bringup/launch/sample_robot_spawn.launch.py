@@ -15,7 +15,7 @@ controller_pkg = get_package_share_directory('omni_wheel_controller')
 
 xacro_file = os.path.join(
     description_pkg,
-    'robots',
+    'description',
     'sample_robot.urdf.xacro'
 )
 
