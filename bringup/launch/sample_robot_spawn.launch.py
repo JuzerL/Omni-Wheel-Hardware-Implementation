@@ -78,6 +78,6 @@ return LaunchDescription([
     ros2_control_node,
     joint_state_broadcaster_spawner, # Using the spawner now
     omni_controller_spawner,         # Using the spawner now
-    velocity_pub,
+    #velocity_pub,
 ])
 ```
