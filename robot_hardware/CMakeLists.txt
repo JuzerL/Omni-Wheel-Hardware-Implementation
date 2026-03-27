@@ -19,7 +19,7 @@ find_package(std_msgs REQUIRED)
 # Library
 # -----------------------
 add_library(${PROJECT_NAME} SHARED
-  src/omni_system_hardware.cpp
+  src/omni_hardware.cpp
 )
 
 # Include directories
