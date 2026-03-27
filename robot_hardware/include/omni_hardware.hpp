@@ -66,7 +66,7 @@ private:
   bool serial_connected_ = false;
 
   // Encoder conversion
-  double ticks_per_revolution_ = 2048.0;
+  double ticks_per_revolution_ = 2048.0; //CHANGE ACCORDING TO OWN ENCODER!!!
   double wheel_radius_ = 0.05; // meters
 };
 
