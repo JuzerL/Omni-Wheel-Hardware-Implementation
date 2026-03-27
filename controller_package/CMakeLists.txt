@@ -14,6 +14,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
   pluginlib
   rclcpp
   rclcpp_lifecycle
+  rcppmath
   rcpputils
   realtime_tools
   tf2
@@ -22,6 +23,7 @@ set(THIS_PACKAGE_INCLUDE_DEPENDS
 
 find_package(ament_cmake REQUIRED)
 find_package(backward_ros REQUIRED)
+find_package(Eigen3 REQUIRED)
 foreach(Dependency IN ITEMS ${THIS_PACKAGE_INCLUDE_DEPENDS})
   find_package(${Dependency} REQUIRED)
 endforeach()
@@ -41,7 +43,7 @@ target_include_directories(omni_wheel_controller PUBLIC
   $<BUILD_INTERFACE:${EIGEN3_INCLUDE_DIR}>
   $<INSTALL_INTERFACE:include/omni_wheel_controller>
 )
-target_link_libraries(omni_wheel_controller PUBLIC omni_wheel_controller_parameters)
+target_link_libraries(omni_wheel_controller PUBLIC omni_wheel_controller_parameters Eigen3::Eigen)
 ament_target_dependencies(omni_wheel_controller PUBLIC ${THIS_PACKAGE_INCLUDE_DEPENDS})
 # Causes the visibility macros to use dllexport rather than dllimport,
 # which is appropriate when building the dll but not consuming it.
