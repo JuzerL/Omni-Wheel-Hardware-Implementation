@@ -1,4 +1,4 @@
-#include "omni_robot_hardware/omni_system_hardware.hpp"
+#include "omni_hardware.hpp"
 #include "pluginlib/class_list_macros.hpp"
 
 // Pro-Way Linux Headers
