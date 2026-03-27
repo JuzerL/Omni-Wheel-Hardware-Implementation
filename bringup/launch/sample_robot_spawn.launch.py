@@ -48,17 +48,17 @@ ros2_control_node = Node(
     output='screen'
 )
 
-# ===== Load Controllers =====
-joint_state_broadcaster = ExecuteProcess(
-    cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-         'joint_state_broadcaster'],
-    output='screen'
+# ===== Load Controllers (Fixed) =====
+joint_state_broadcaster_spawner = Node(
+    package="controller_manager",
+    executable="spawner",
+    arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
 )
 
-omni_controller = ExecuteProcess(
-    cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-         'omni_wheel_controller'],
-    output='screen'
+omni_controller_spawner = Node(
+    package="controller_manager",
+    executable="spawner",
+    arguments=["omni_wheel_controller", "--controller-manager", "/controller_manager"],
 )
 
 # ===== Optional: cmd_vel test node =====
@@ -72,11 +72,12 @@ velocity_pub = Node(
     output='screen'
 )
 
+# ===== Return LaunchDescription =====
 return LaunchDescription([
     robot_state_publisher,
     ros2_control_node,
-    joint_state_broadcaster,
-    omni_controller,
+    joint_state_broadcaster_spawner, # Using the spawner now
+    omni_controller_spawner,         # Using the spawner now
     velocity_pub,
 ])
 ```
