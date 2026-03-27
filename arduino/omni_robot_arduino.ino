@@ -1,19 +1,18 @@
 #include "motors.h"
 
 /*
-  ===========================
+  =====================================================
   CONFIG
-  ===========================
+  =====================================================
 */
 #define BAUD_RATE 115200
-
-#define CMD_TIMEOUT 500    // ms (watchdog)
-#define FEEDBACK_INTERVAL 50 // ms
+#define WATCHDOG_TIMEOUT 500     // ms
+#define FEEDBACK_INTERVAL 50     // ms
 
 /*
-  ===========================
+  =====================================================
   GLOBAL VARIABLES
-  ===========================
+  =====================================================
 */
 String input_buffer = "";
 
@@ -24,15 +23,14 @@ unsigned long last_feedback_time = 0;
 
 
 /*
-  ===========================
+  =====================================================
   SETUP
-  ===========================
+  =====================================================
 */
 void setup()
 {
   Serial.begin(BAUD_RATE);
-
-  init_motors();
+  setup_motors();
 
   last_cmd_time = millis();
   last_feedback_time = millis();
@@ -40,24 +38,23 @@ void setup()
 
 
 /*
-  ===========================
-  PARSE COMMAND STRING
+  =====================================================
+  PARSE SERIAL COMMAND
   Format: $W1,W2,W3,W4\n
-  ===========================
+  =====================================================
 */
 void parse_command(String cmd)
 {
-  // Remove starting '$'
+  // Remove '$'
   cmd.remove(0, 1);
 
   int values[4];
   int index = 0;
 
-  char *token;
   char buffer[50];
   cmd.toCharArray(buffer, sizeof(buffer));
 
-  token = strtok(buffer, ",");
+  char *token = strtok(buffer, ",");
 
   while (token != NULL && index < 4)
   {
@@ -73,15 +70,16 @@ void parse_command(String cmd)
     w4 = values[3];
 
     write_motors(w1, w2, w3, w4);
+
     last_cmd_time = millis();
   }
 }
 
 
 /*
-  ===========================
-  SERIAL READ (NON-BLOCKING)
-  ===========================
+  =====================================================
+  NON-BLOCKING SERIAL READ
+  =====================================================
 */
 void read_serial()
 {
@@ -89,7 +87,6 @@ void read_serial()
   {
     char c = Serial.read();
 
-    // End of message
     if (c == '\n')
     {
       if (input_buffer.length() > 0 && input_buffer[0] == '$')
@@ -97,7 +94,7 @@ void read_serial()
         parse_command(input_buffer);
       }
 
-      input_buffer = ""; // reset buffer
+      input_buffer = "";
     }
     else
     {
@@ -114,25 +111,25 @@ void read_serial()
 
 
 /*
-  ===========================
+  =====================================================
   WATCHDOG SAFETY
-  ===========================
+  Stops robot if no command received
+  =====================================================
 */
-void watchdog_check()
+void watchdog()
 {
-  if (millis() - last_cmd_time > CMD_TIMEOUT)
+  if (millis() - last_cmd_time > WATCHDOG_TIMEOUT)
   {
-    // Stop robot immediately
     write_motors(0, 0, 0, 0);
   }
 }
 
 
 /*
-  ===========================
-  FEEDBACK (ENCODER PLACEHOLDER)
+  =====================================================
+  FEEDBACK TO ROS 2
   Format: #E1,E2,E3,E4\n
-  ===========================
+  =====================================================
 */
 void send_feedback()
 {
@@ -141,32 +138,19 @@ void send_feedback()
     last_feedback_time = millis();
 
     // Placeholder encoder values
-    int e1 = 0;
-    int e2 = 0;
-    int e3 = 0;
-    int e4 = 0;
-
-    Serial.print("#");
-    Serial.print(e1);
-    Serial.print(",");
-    Serial.print(e2);
-    Serial.print(",");
-    Serial.print(e3);
-    Serial.print(",");
-    Serial.print(e4);
-    Serial.print("\n");
+    Serial.print("#0,0,0,0\n");
   }
 }
 
 
 /*
-  ===========================
+  =====================================================
   MAIN LOOP
-  ===========================
+  =====================================================
 */
 void loop()
 {
-  read_serial();     // Handle incoming commands
-  watchdog_check();  // Safety stop if no command
-  send_feedback();   // Send encoder data
+  read_serial();   // Receive commands
+  watchdog();      // Safety stop
+  send_feedback(); // Send encoder data
 }
