@@ -15,11 +15,18 @@ omni_wheel_controller:
     # -------------------------
     # Joint Configuration
     # -------------------------
-    joints:
+    # -------------------------
+    # Joint Configuration
+    # -------------------------
+    omni_wheel_names:
       - front_left_wheel_joint
       - front_right_wheel_joint
       - rear_left_wheel_joint
       - rear_right_wheel_joint
+
+    # Example angles in radians (45, 135, 225, 315 degrees)
+    # You will need to adjust these based on your actual CAD model!
+    omni_wheel_angle: [0.785398, 2.35619, 3.92699, 5.49779] 
 
     command_interfaces:
       - velocity
@@ -32,7 +39,7 @@ omni_wheel_controller:
     # Robot Kinematics
     # -------------------------
     wheel_radius: 0.05          # meters
-    robot_radius: 0.25          # center → wheel distance
+    omni_wheel_distance: 0.25   # center → wheel distance
 
     # -------------------------
     # Limits
